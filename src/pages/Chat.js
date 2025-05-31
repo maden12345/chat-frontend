@@ -13,7 +13,7 @@ function Chat() {
   // Mesela: if (!username) return <div>Lütfen giriş yapın</div>;
 
   useEffect(() => {
-    fetch("http://localhost:8000/users")
+    fetch(`${process.env.REACT_APP_API_URL}/users`)
       .then((res) => res.json())
       .then((data) => {
         const filtered = data.filter((u) => u.username !== username);
@@ -30,7 +30,7 @@ function Chat() {
       ws.current = null;
     }
 
-    ws.current = new WebSocket(`ws://localhost:8000/ws/${username}`);
+    ws.current = new WebSocket(`${process.env.REACT_APP_WS_URL}/ws/${username}`);
 
     ws.current.onopen = () => {
       console.log("WebSocket bağlantısı açıldı.");
@@ -72,7 +72,7 @@ function Chat() {
   useEffect(() => {
     selectedUserRef.current = selectedUser;
     if (selectedUser) {
-      fetch(`http://localhost:8000/messages/${username}/${selectedUser}`)
+      fetch(`${process.env.REACT_APP_API_URL}/messages/${username}/${selectedUser}`)
         .then((res) => res.json())
         .then((data) => {
           setMessages(data);
