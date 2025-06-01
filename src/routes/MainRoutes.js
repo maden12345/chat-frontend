@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./login";
-import Register from "./register";
-import Chat from "./chat";
+import Login from "../login";        // 🔧 düzeltildi
+import Register from "../register";  // 🔧 düzeltildi
+import Chat from "../chat";          // 🔧 düzeltildi
 
 const MainRoutes = () => {
   const isAuthenticated = !!localStorage.getItem("token");
