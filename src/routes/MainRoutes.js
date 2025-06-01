@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Login from "../login";        // 🔧 düzeltildi
-import Register from "../register";  // 🔧 düzeltildi
-import Chat from "../chat";          // 🔧 düzeltildi
+import Login from "../pages/login";
+import Register from "../pages/register";
+import Chat from "../pages/chat";
 
 const MainRoutes = () => {
   const isAuthenticated = !!localStorage.getItem("token");
@@ -14,9 +14,7 @@ const MainRoutes = () => {
         <Route path="/register" element={<Register />} />
         <Route
           path="/chat"
-          element={
-            isAuthenticated ? <Chat /> : <Navigate to="/login" />
-          }
+          element={isAuthenticated ? <Chat /> : <Navigate to="/login" />}
         />
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
@@ -25,3 +23,4 @@ const MainRoutes = () => {
 };
 
 export default MainRoutes;
+
