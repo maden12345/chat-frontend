@@ -1,18 +1,27 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Login from "./login";
+import Register from "./register";
+import Chat from "./chat";
 
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import Chat from "../pages/Chat";
+const MainRoutes = () => {
+  const isAuthenticated = !!localStorage.getItem("token");
 
-export default function MainRoutes() {
   return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/chat" element={<Chat />} />
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/chat"
+          element={
+            isAuthenticated ? <Chat /> : <Navigate to="/login" />
+          }
+        />
+        <Route path="*" element={<Navigate to="/login" />} />
+      </Routes>
+    </Router>
   );
-}
+};
+
+export default MainRoutes;
